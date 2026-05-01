@@ -1,0 +1,54 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro"; // este es para importar la estructura de header y footer
+import ProductCard from "../../components/ProductCard.astro"; //este es para reutilizar la tarjeta o como la vitrina de catalogos de ProductCard.astro
+
+// debajo de esto estoy definiendo y creando un array de objetos en javascript
+const productos = [
+  { nombre: "Laptop Gamer", precio: 3500, imagen: "/images/laptop_geamer.png" },
+  { nombre: "Mouse RGB", precio: 120, imagen: "/images/mouse.png" },
+  { nombre: "Monitor 24''", precio: 900, imagen: "/images/laptop_geamer.png" },
+  {
+    nombre: "Teclado Mecánico",
+    precio: 250,
+    imagen: "/images/laptop_geamer.png",
+  },
+];
+---
+
+<!-- este es como para ya mostrar en la pagina con la estructura y los estilos y esas cosas -->
+<MainLayout>
+  <h2>catalogo de productos</h2>
+
+  <div class="grid">
+    {
+      productos.map((p) => (
+        <ProductCard nombre={p.nombre} precio={p.precio} imagen={p.imagen} />
+      ))
+    }
+  </div>
+
+  <a href="/" class="volver">volver al inicio</a>
+</MainLayout>
+//
+
+<style>
+  .grid {
+    display: grid; /* el grid es para poder organizar la informacion en columnas osea para abajo_xd*/
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(200px, 1fr)
+    ); /* auto-fit. es para qeu la informacion se adapte al tamaño */
+    gap: 1rem; /*es para los espacios entre los puntos */
+  }
+
+  /*estilos para el boton de volver */
+  .volver {
+    display: inline-block;
+    margin-top: 2rem;
+    text-decoration: none;
+    background: black;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+  }
+</style>
