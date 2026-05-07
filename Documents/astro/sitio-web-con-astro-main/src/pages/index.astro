@@ -1,0 +1,158 @@
+---
+import MainLayout from "../layouts/MainLayout.astro"; // este es para importar la estructura de header y footer
+---
+
+<MainLayout>
+  <section class="hero">
+    <div class="hero-content">
+      <span class="badge">tienda de tecnologia_xd_</span>
+
+      <div class="logo-container">
+        <img src="images/logo.png" alt="Logo de la tienda" class="logo-main" />
+      </div>
+      <p>
+        Bienvenidos a la tienda de tecnologia desarrollada por jose luis,
+        encuentra lo ultimo en gadgets, y perifericos con la mejor garantia_xd
+      </p>
+
+      <div class="hero-buttons">
+        <a href="/catalogo" class="btn-primary">ver catalogo</a>
+        <a href="/contactos" class="btn-secondary">saber mas</a>
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  .hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh; /* Para que ocupe buena parte de la pantalla */
+    text-align: center;
+    padding: 2rem;
+    background: radial-gradient(circle at top, #ffffff, #f0f2f5);
+  }
+
+  .hero-content {
+    max-width: 800px;
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  .badge {
+    background: #e0f0ff;
+    color: #0070f3;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+  }
+
+  /* estilos del logo  */
+
+  .logo-container {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    padding: 2rem 0; /* Da espacio arriba y abajo */
+    width: 100%;
+  }
+
+  .logo-main {
+    width: 350px; /* Ajusta el tamaño a tu gusto */
+    height: auto;
+    border-radius: 20px; /* Bordes redondeados modernos */
+    border: 3px solid #111; /* Borde sólido negro (puedes cambiarlo a @0070f3) */
+    padding: 10px; /* Espacio entre el logo y el borde */
+    background: white; /* Fondo blanco por si el logo es transparente */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Sombra suave para profundidad */
+    transition: all 0.3s ease; /* Para que el efecto hover sea suave */
+  }
+
+  /* Efecto cuando pasas el mouse */
+  .logo-main:hover {
+    transform: scale(1.05); /* Se agranda un poquito */
+    border-color: #0070f3; /* Cambia el color del borde al pasar el mouse */
+    box-shadow: 0 15px 30px rgba(0, 112, 243, 0.2);
+  }
+
+  p {
+    font-size: 1.25rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+  }
+
+  .autor {
+    color: #0070f3;
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
+  /* BOTONES */
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: #111;
+    color: white;
+    padding: 1rem 2.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    background: #333;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: #111;
+    padding: 1rem 2.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid #eee;
+    transition: all 0.3s ease;
+  }
+
+  .btn-secondary:hover {
+    background: #fafafa;
+    border-color: #111;
+  }
+
+  /* Animación de entrada */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Ajustes para móviles */
+  @media (max-width: 600px) {
+    .hero {
+      min-height: 50vh;
+      padding-top: 4rem;
+    }
+    h1 {
+      font-size: 2.2rem;
+    }
+  }
+</style>

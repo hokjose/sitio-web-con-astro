@@ -1,0 +1,277 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro"; // este es para importar la estructura de header y footer
+import ProductCard from "../../components/ProductCard.astro"; //este es para reutilizar la tarjeta o como la vitrina de catalogos de ProductCard.astro
+
+// debajo de esto estoy definiendo y creando un array de objetos en javascript
+const productos = [
+  {
+    nombre: "Laptop Gamer",
+    precio: 3500,
+    imagen: "/images/laptop_geamer.png",
+    descripcion:
+      "Procesador i9, 32GB RAM, RTX 4080. Ideal para streaming y edicion de videos.",
+  },
+  {
+    nombre: "Mouse RGB",
+    precio: 120,
+    imagen: "/images/mouse.png",
+    descripcion:
+      "sensor optico de 16000 DPI con luces personalizables y botones laterales.",
+  },
+  {
+    nombre: "Monitor 24''",
+    precio: 900,
+    imagen: "/images/laptop_geamer.png",
+    descripcion: "monitor full hd, ideal para streaming, y netflix_xd",
+  },
+  {
+    nombre: "Teclado Mecanico",
+    precio: 250,
+    imagen: "/images/laptop_geamer.png",
+    descripcion:
+      "teclas suaves al contacto, ideal para programacion y juegos como dota_xd",
+  },
+];
+---
+
+<!-- este es como para ya mostrar en la pagina con la estructura y los estilos y esas cosas -->
+<MainLayout>
+  <h2>catalogo de Productos</h2>
+
+  <div class="grid">
+    {
+      productos.map((p, index) => (
+        <div class="producto-contenedor">
+          <ProductCard nombre={p.nombre} precio={p.precio} imagen={p.imagen} />
+
+          <button class="btn-abrir" data-id={index}>
+            ver caracteristicas
+          </button>
+
+          <dialog id={`modal-${index}`} class="modal">
+            <div class="modal-content">
+              <img src={p.imagen} alt={p.nombre} width="200" />
+              <h3>{p.nombre}</h3>
+              <p>{p.descripcion}</p>
+              <p class="precio">S/ {p.precio}</p>
+
+              <div class="acciones">
+                <button class="btn-comprar" onclick="alert('producto añadido')">
+                  Comprar
+                </button>
+                <button class="btn-regresar" data-id={index}>
+                  Regresar
+                </button>
+              </div>
+            </div>
+          </dialog>
+        </div>
+      ))
+    }
+  </div>
+
+  <a href="/" class="volver">Volver al inicio</a>
+</MainLayout>
+//
+
+<style>
+  .grid {
+    display: grid; /* el grid es para poder organizar la informacion en columnas osea para abajo_xd*/
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(200px, 1fr)
+    ); /* auto-fit. es para qeu la informacion se adapte al tamaño */
+    gap: 1rem; /*es para los espacios entre los puntos */
+  }
+
+  /* Variables para cambiar colores fácilmente */
+  :root {
+    --primary: #0070f3;
+    --primary-hover: #0056b3;
+    --success: #28a745;
+    --dark: #1a1a1a;
+    --light-gray: #f4f4f4;
+    --text-main: #333;
+    --shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  }
+
+  /* Contenedor principal */
+  h2 {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+    color: var(--dark);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+  }
+
+  /* Contenedor de cada producto */
+  .producto-contenedor {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .producto-contenedor:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Botón Ver Características */
+  .btn-abrir {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 8px;
+    background: var(--dark);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-abrir:hover {
+    background: #444;
+  }
+
+  /* ESTILOS DEL MODAL (CUADRO EMERGENTE) */
+  .modal {
+    border: none;
+    border-radius: 20px;
+    padding: 0; /* Quitamos padding para manejarlo interno */
+    max-width: 500px;
+    width: 90%;
+    overflow: hidden;
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .modal::backdrop {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px); /* Efecto de desenfoque de fondo */
+  }
+
+  .modal-content {
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .modal-content img {
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    object-fit: cover;
+  }
+
+  .modal-content h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .precio {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary);
+    margin: 1rem 0;
+  }
+
+  /* Botones dentro del Modal */
+  .acciones {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .btn-comprar {
+    background: var(--success);
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .btn-regresar {
+    background: var(--light-gray);
+    color: var(--dark);
+    border: none;
+    padding: 1rem;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .btn-comprar:hover {
+    opacity: 0.9;
+  }
+  .btn-regresar:hover {
+    background: #e0e0e0;
+  }
+
+  /* Botón Volver al Inicio */
+  .volver {
+    display: block;
+    width: fit-content;
+    margin: 3rem auto;
+    padding: 1rem 2rem;
+    border: 2px solid var(--dark);
+    color: var(--dark);
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: all 0.3s;
+  }
+
+  .volver:hover {
+    background: var(--dark);
+    color: white;
+  }
+
+  /* Animación de entrada */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+</style>
+
+<script>
+  // Buscamos todos los botones de abrir
+  const botonesAbrir = document.querySelectorAll(".btn-abrir");
+  const botonesCerrar = document.querySelectorAll(".btn-regresar");
+
+  botonesAbrir.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-id");
+      const modal = document.getElementById(`modal-${id}`);
+      modal.showModal(); // Esto abre el cuadro
+    });
+  });
+
+  botonesCerrar.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-id");
+      const modal = document.getElementById(`modal-${id}`);
+      modal.close(); // Esto cierra el cuadro
+    });
+  });
+</script>

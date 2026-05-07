@@ -1,0 +1,18 @@
+---
+const { nombre, precio, imagen } = Astro.props;
+---
+
+<div class="card">
+  <img src={imagen} alt={nombre} class="producto-img" />
+  <h3>{nombre}</h3>
+  <p>S/ {precio}</p>
+</div>
+
+<style>
+  .producto-img {
+    width: 120px; /* 👈 aquí controlas el tamaño */
+    height: auto;
+    display: block;
+    margin: 0 auto; /* 👈 centra la imagen */
+  }
+</style>
